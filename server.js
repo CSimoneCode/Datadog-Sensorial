@@ -1,8 +1,13 @@
 // connection to server
 const express = require('express');
 const app = express();
+const dd_options = {
+  'response_code':true,
+  'tags': ['app:sensorial']
+}
 
 // 3rd party modules
+const connect_datadog = require('connect-datadog')(dd_options);
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
@@ -36,6 +41,7 @@ app.use((req, res, next) => {
 });
 
 // Middleware
+app.use(connect_datadog);
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
