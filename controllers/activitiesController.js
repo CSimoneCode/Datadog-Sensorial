@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const prompts = require('./promptSeedData');
-const user = require('./userSeedData');
+const promptsArr = require('./promptSeedData');
+const userArr = require('./userSeedData');
 
 // Database connection
 const db = require('../models');
@@ -97,5 +97,22 @@ router.delete('/:activityId', (req, res) => {
       console.log(deletedActivity)
     })
 });
+
+// User.collection.insertMany(userArr, (err, userArr)=>{
+//     if (err){
+//         console.log(err);
+//     }else{
+//         console.log(userArr);
+//     }
+// });
+
+// Prompt.collection.insertMany(promptsArr, (err, promptsArr)=>{
+//     if (err){
+//         console.log(err);
+//     }else{
+//         console.log(promptsArr);
+//     }
+//     process.exit();
+// });
 
 module.exports = router;

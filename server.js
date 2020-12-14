@@ -5,6 +5,8 @@ const dd_options = {
   'response_code':true,
   'tags': ['app:sensorial']
 }
+const StatsD = require('hot-shots');
+const dogstatsd = new StatsD();
 
 // 3rd party modules
 const connect_datadog = require('connect-datadog')(dd_options);
@@ -19,6 +21,9 @@ const PORT = process.env.PORT || 4000;
 // set view engine
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
+
+// increment statsd counter
+dogstatsd.increment('page.views')
 
 // CONTROLLERS
 const ctrl = require('./controllers');
